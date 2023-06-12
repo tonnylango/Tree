@@ -1,3 +1,6 @@
+from functools import total_ordering
+
+@total_ordering
 class Node:
 
     def __init__(self, value, left=None, right=None, parent=None):
@@ -23,8 +26,14 @@ class Node:
                 node.parent = self
                 self.right = node
 
+    def __hash__(self) -> int:
+        return hash(self.__value)
+
         
     def __str__(self):
+        return str(self.__value)
+    
+    def __repr__(self) -> str:
         return str(self.__value)
 
     def __lt__(self, other):
@@ -32,10 +41,10 @@ class Node:
             return self.__value < other.get_value()
         return NotImplemented
 
-    def __gt__(self, other):
-        if isinstance(other, Node):
-            return self.__value > other.get_value()
-        return NotImplemented
+    #def __gt__(self, other):
+    #    if isinstance(other, Node):
+    #       return self.__value > other.get_value()
+    #   return NotImplemented
 
     def __eq__(self, other):
         if isinstance(other, Node):

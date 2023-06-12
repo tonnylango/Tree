@@ -14,11 +14,16 @@ class Tree:
 
     #insert the node into the tree
     def insert(self, value):
-        if not
+        node = Node(value)
+        if not self._root: #if root is not set
 
     #returns the number of edges from the root node to that particular node
     def depth(self, value):
         pass
+
+    #Check if an item is contained in the tree
+    def __contains__(self, item):
+        pass 
 
     #delete the node from the tree
     def remove(self, value):
