@@ -3,25 +3,37 @@ from functools import total_ordering
 @total_ordering
 class Node:
 
-    def __init__(self, value, left=None, right=None, parent=None):
+    def __init__(self, value):
         self.__value = value
-        self.left = left
-        self.right = right
-        self.parent = parent
+        self.left = None
+        self.right = None
+        self.parent = None
 
     def get_value(self):
         return self.__value
+        
+    #append a data, value should be the same type
+    def append(self, data):
+        if not isinstance(data, Node) and not isinstance(self.__value, Node): #if data is not a Node, make it a node
+            if not isinstance(data, self.__value.__class__): #check if data is the same class as the current node value
+                raise TypeError("Invalid data type. Expected instance of {}.".format(self.__value.__class__.__name__))
+            else:
+                data = Node(data)
+
+        if self != data:
+            self.append_node(data)
+
     
-    def append(self, node):
-        if self < node:
+    def append_node(self, node):
+        if node < self: #if self 
             if self.left:
-                self.left.append(node)
+                self.left.append_node(node)
             else:
                 node.parent = self
                 self.left = node
-        elif self > node:
+        elif node > self:
             if self.right:
-                self.right.append(node)
+                self.right.append_node(node)
             else:
                 node.parent = self
                 self.right = node

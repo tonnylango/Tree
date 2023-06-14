@@ -1,4 +1,4 @@
-from . import Node
+from node import Node
 
 class Tree:
     #take a list of elements, convert them to nodes and connect them
@@ -16,6 +16,7 @@ class Tree:
     def insert(self, value):
         node = Node(value)
         if not self._root: #if root is not set
+            pass
 
     #returns the number of edges from the root node to that particular node
     def depth(self, value):
