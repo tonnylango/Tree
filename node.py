@@ -14,13 +14,10 @@ class Node:
         
     #append a data, value should be the same type
     def append(self, data):
-        if not isinstance(data, Node) and not isinstance(self.__value, Node): #if data is not a Node, make it a node
-            if not isinstance(data, self.__value.__class__): #check if data is the same class as the current node value
-                raise TypeError("Invalid data type. Expected instance of {}.".format(self.__value.__class__.__name__))
-            else:
-                data = Node(data)
-
-        if self != data:
+        if not isinstance(data, type(self.__value)): #check if data is the same class as the current node value
+            raise TypeError("Invalid data type. Expected instance of {}.".format(self.__value.__class__.__name__))
+        
+        if self != (data := Node(data)):
             self.append_node(data)
 
     
@@ -37,6 +34,16 @@ class Node:
             else:
                 node.parent = self
                 self.right = node
+
+    def depth(self):
+        if self is None:
+            return 0
+
+        #left_depth = self.left.tree_depth() if self.left else 0
+        #right_depth = self.right.tree_depth() if self.right else 0
+        
+        #1 is added to it to account for the current level
+        return max(Node.depth(self.left), Node.depth(self.right)) + 1
 
     def __hash__(self) -> int:
         return hash(self.__value)

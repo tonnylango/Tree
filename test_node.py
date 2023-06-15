@@ -37,28 +37,24 @@ class TestNode(unittest.TestCase):
     def test_append_small(self):
         #int
         node = Node(5)
-        node_to_append = Node(1) #int node
-        node.append(node_to_append)
+        node.append(1)
         self.assertIsNotNone(node.left, "Left node should have small value int")
         self.assertIsNone(node.right, "Right node should be empty int")
 
         #node
-        another_node = Node(0)
-        node.append(another_node)
+        node.append(0)
         self.assertIsNotNone(node.left.left, "Left node should have small value int")
         #self.assertIsNone(node.get_right(), "Right node should be empty int")
 
     def test_append_big(self):
         #int
         node = Node(5)
-        node_to_append = Node(10) #int node
-        node.append(node_to_append)
+        node.append(10)
         self.assertIsNotNone(node.right, "right node should have big value int")
         self.assertIsNone(node.left, "left node should be empty int")
 
         #node
-        another_node = Node(15)
-        node.append(another_node)
+        node.append(15)
         self.assertIsNotNone(node.right.right, "Left node should have small value int")
         #self.assertIsNone(node.get_right(), "Right node should be empty int")
     

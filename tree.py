@@ -2,28 +2,37 @@ from node import Node
 
 class Tree:
     #take a list of elements, convert them to nodes and connect them
-    def __init__(self, values:list):
+    def __init__(self, values:iter=[]):
         self.__root #stores the root node
         self.__count = 0 #stores number of node
         #TODO convert to for each
-        
-        
+
+        #if not values:
+        #   raise ValueError("Values cannot be empty")
+        if not isinstance(value, iter):
+            raise ValueError("Invalid argument type. Expected an iterable object.")
+        else:
+            for value in values:
+                self.insert(value)      
     
     def get_root(self):
         return self.__root
 
     #insert the node into the tree
-    def insert(self, value):
-        node = Node(value)
-        if not self._root: #if root is not set
-            pass
+    def insert(self, data):
+        if not self.__root: #root is not set
+            self.__root = Node(data)
+        else:
+            self.__root.append(data)
+
+        self.__count += 1
 
     #returns the number of edges from the root node to that particular node
-    def depth(self, value):
-        pass
+    def depth(self, node, from_node=None) -> int:
+        from_node = from_node or self.__root
 
     #Check if an item is contained in the tree
-    def __contains__(self, item):
+    def __contains__(self, item) :
         pass 
 
     #delete the node from the tree
@@ -31,12 +40,12 @@ class Tree:
         pass
 
     #check if the value exist in the tree
-    def search(self, node):
+    def search(self, node) -> Node:
         pass
 
     #count total number of nodes
-    def count(self):
-        pass
+    def __len__(self):
+        return self.__count
 
     #return a sorted iterator
     def __iter__(self):
